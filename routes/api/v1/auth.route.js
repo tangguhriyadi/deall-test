@@ -1,12 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/auth/login", (req, res) => {
-    res.status(200).send({
-        status: 200,
-        message: "ok",
-    });
-});
+const { login } = require("../../../controllers/auth/login.controller");
 
+router.get("/auth/login", login);
 
 module.exports = router;
