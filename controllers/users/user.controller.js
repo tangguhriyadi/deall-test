@@ -34,10 +34,11 @@ exports.fetchOne = async (req, res) => {
         });
     }
 };
-exports.update = async (req, res) => {
+exports.patch = async (req, res) => {
     try {
-        const data = await Users.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
+
+        const data = await Users.findOneAndUpdate(req.params.id, req.body, {
+            upsert: true,
         });
         res.status(200).send({ data, status: 200 });
     } catch (error) {
