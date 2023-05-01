@@ -6,6 +6,7 @@ exports.login = async (req, res) => {
             id: 1,
             username: "tangguh",
             email: "mtangguh97@gmail.com",
+            role:"admin"
         };
 
         //generate token

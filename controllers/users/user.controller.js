@@ -15,7 +15,7 @@ exports.fetchAll = async (req, res) => {
 exports.create = async (req, res) => {
     try {
         const data = new Users(req.body);
-        data.save(data).then(() => res.status(201).send({ data, status: 201 }));
+        data.save(data).then(() => res.status(201).send({ data, status: 201 })).catch((err) => res.status(400).send({error:err}))
     } catch (error) {
         res.status(500).send({
             message:

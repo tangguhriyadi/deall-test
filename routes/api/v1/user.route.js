@@ -9,12 +9,13 @@ const {
     patch,
     deleteOne,
 } = require("../../../controllers/users/user.controller");
+const { validateToken, validateScope } = require("../../../middlewares/auth.middleware");
 
 // API GET ALL
-router.get("/users", fetchAll);
+router.get("/users", validateToken, validateScope(['admin', 'user']), fetchAll);
 
 // API CREATE
-router.post("/users", (req, res) => {
+router.post("/users", validateToken, validateScope(['admin']), (req, res) => {
     const passwordRegex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
@@ -53,7 +54,7 @@ router.post("/users", (req, res) => {
 });
 
 // API GET ONE
-router.get("/users/:id", (req, res) => {
+router.get("/users/:id", validateToken, validateScope(['admin', 'user']), (req, res) => {
     const schemaParam = Joi.object({
         id: Joi.string().required(),
     });
@@ -69,7 +70,7 @@ router.get("/users/:id", (req, res) => {
 });
 
 // API UPDATE
-router.patch("/users/:id", (req, res) => {
+router.patch("/users/:id", validateToken, validateScope(['admin']), (req, res) => {
     const passwordRegex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const schemaParam = Joi.object({
@@ -115,7 +116,7 @@ router.patch("/users/:id", (req, res) => {
 });
 
 // API DELETE
-router.delete("/users/:id", (req, res) => {
+router.delete("/users/:id",  validateToken, validateScope(['admin']), (req, res) => {
     const schemaParam = Joi.object({
         id: Joi.string().required(),
     });
