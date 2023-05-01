@@ -6,9 +6,6 @@ module.exports = mongoose => {
 		mongoose.Schema(
 			{
 				name: String,
-				birth_date: Date,
-				address: String,
-				is_verified: Boolean,
 				role: String,
 				email: {
 					type: String,
