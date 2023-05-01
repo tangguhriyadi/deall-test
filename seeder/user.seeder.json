@@ -4,13 +4,15 @@
       "role": "admin",
       "age": 25,
       "email": "mtangguh97@gmail.com",
-      "phone":"082116780425"
+      "phone":"082116780425",
+      "password":"a1S2D3!qr"
     },
     {
         "name": "John Doe",
         "role": "user",
         "age": 25,
         "email": "john@gmail.com",
-        "phone":"0821167804253"
+        "phone":"0821167804253",
+        "password":"a1S2D3!qr"
     }
 ]

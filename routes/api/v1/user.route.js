@@ -10,14 +10,13 @@ const {
     deleteOne,
 } = require("../../../controllers/users/user.controller");
 const { validateToken, validateScope } = require("../../../middlewares/auth.middleware");
+const { passwordRegex } = require("../../../utils/constant");
 
 // API GET ALL
 router.get("/users", validateToken, validateScope(['admin', 'user']), fetchAll);
 
 // API CREATE
 router.post("/users", validateToken, validateScope(['admin']), (req, res) => {
-    const passwordRegex =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     const schemaPayload = Joi.object({
         name: Joi.string().required(),
@@ -71,8 +70,6 @@ router.get("/users/:id", validateToken, validateScope(['admin', 'user']), (req, 
 
 // API UPDATE
 router.patch("/users/:id", validateToken, validateScope(['admin']), (req, res) => {
-    const passwordRegex =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const schemaParam = Joi.object({
         id: Joi.string().required(),
     });

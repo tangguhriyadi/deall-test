@@ -1,5 +1,7 @@
 const { ObjectId } = require("mongoose").Types;
 const { Users } = require("../../models");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 exports.fetchAll = async (req, res) => {
     try {
@@ -14,8 +16,15 @@ exports.fetchAll = async (req, res) => {
 };
 exports.create = async (req, res) => {
     try {
-        const data = new Users(req.body);
-        data.save(data).then(() => res.status(201).send({ data, status: 201 })).catch((err) => res.status(400).send({error:err}))
+        const user = {
+            ...req.body,
+            password: await bcrypt.hash(req.body.password, saltRounds),
+        };
+
+        const data = new Users(user);
+        data.save(data)
+            .then(() => res.status(201).send({ message:'create user success !', status: 201 }))
+            .catch((err) => res.status(400).send({ error: err }));
     } catch (error) {
         res.status(500).send({
             message:
@@ -36,7 +45,6 @@ exports.fetchOne = async (req, res) => {
 };
 exports.patch = async (req, res) => {
     try {
-
         const data = await Users.findOneAndUpdate(req.params.id, req.body, {
             upsert: true,
         });
@@ -50,11 +58,10 @@ exports.patch = async (req, res) => {
 };
 exports.deleteOne = async (req, res) => {
     try {
+        const user = await Users.findById(req.params.id);
 
-        const user = await Users.findById(req.params.id)
-
-        if(!user) {
-            res.status(400).send({message: `User not found`})
+        if (!user) {
+            res.status(400).send({ message: `User not found` });
             return;
         }
 

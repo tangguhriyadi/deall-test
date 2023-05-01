@@ -2,6 +2,8 @@ require("dotenv").config();
 const { checkConnectionDb } = require("../config/db.config");
 const { Users, Roles } = require("../models");
 const fs = require("fs");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 checkConnectionDb();
 
@@ -15,7 +17,12 @@ const roles = JSON.parse(
 
 const importData = async () => {
     try {
-        await Users.create(users)
+        const promiseUser = users.map(async (user) => ({
+            ...user,
+            password:await bcrypt.hash(user.password, saltRounds)
+        }))
+        const newUsers = await Promise.all(promiseUser)
+        await Users.create(newUsers)
         await Roles.create(roles)
         console.log('success seed')
         process.exit()
