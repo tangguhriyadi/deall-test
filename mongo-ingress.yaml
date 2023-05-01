@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mongodb-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: mongodb.local
+    http:
+      paths:
+      - path: /mongodb
+        pathType: Prefix
+        backend:
+          service:
+            name: mongodb
+            port:
+              name: mongodb

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js --legacy-watch --trace-warnings"
+    "dev": "nodemon index.js --legacy-watch --trace-warnings",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.1.0"
+    "mongoose": "^7.1.0",
+    "mongoose-paginate-v2": "^1.7.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

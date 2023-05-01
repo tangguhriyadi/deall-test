@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const API_AUTH = require('./v1/auth.route');
+const API_USER = require('./v1/user.route')
 
 router.use(
     "/v1",
@@ -13,4 +14,5 @@ router.use(
 );
 
 router.use("/v1/", API_AUTH);
+router.use("/v1/", API_USER);
 module.exports = router;
