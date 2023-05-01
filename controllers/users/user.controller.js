@@ -14,7 +14,6 @@ exports.fetchAll = async (req, res) => {
 };
 exports.create = async (req, res) => {
     try {
-       
         const data = new Users(req.body);
         data.save(data).then(() => res.status(201).send(data));
     } catch (error) {
@@ -26,7 +25,20 @@ exports.create = async (req, res) => {
 };
 exports.fetchOne = async (req, res) => {
     try {
-        const data = await Users.findById(req.params.id)
+        const data = await Users.findById(req.params.id);
+        res.status(200).send({ data });
+    } catch (error) {
+        res.status(500).send({
+            message:
+                error.message || "Some error occurred while fetching data.",
+        });
+    }
+};
+exports.update = async (req, res) => {
+    try {
+        const data = await Users.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
         res.status(200).send({ data });
     } catch (error) {
         res.status(500).send({
