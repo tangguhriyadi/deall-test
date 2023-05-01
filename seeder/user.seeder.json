@@ -1,0 +1,16 @@
+[
+    {
+      "name": "Muhammad Tangguh Riyadi",
+      "role": "admin",
+      "age": 25,
+      "email": "mtangguh97@gmail.com",
+      "phone":"082116780425"
+    },
+    {
+        "name": "John Doe",
+        "role": "user",
+        "age": 25,
+        "email": "john@gmail.com",
+        "phone":"0821167804253"
+    }
+]

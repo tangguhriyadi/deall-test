@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js --legacy-watch --trace-warnings",
-    "start": "node index.js"
+    "start": "node index.js",
+    "seed:insert": "node ./seeder/index.js -i",
+    "seed:delete": "node ./seeder/index.js -i"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.0",
-    "mongoose-paginate-v2": "^1.7.1"
+    "mongoose-paginate-v2": "^1.7.1",
+    "mongoose-seeder": "^1.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
