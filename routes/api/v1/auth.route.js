@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const { login } = require("../../../controllers/auth/login.controller");
+const { login, refreshToken } = require("../../../controllers/auth/login.controller");
 const Joi = require("joi");
 const { passwordRegex } = require("../../../utils/constant");
 
-router.get("/auth/login", (req, res) => {
+router.post("/auth/login", (req, res) => {
     const schemaPayload = Joi.object({
         email: Joi.string().email().required(),
         password: Joi.string()
@@ -30,5 +30,19 @@ router.get("/auth/login", (req, res) => {
 
     login(req, res);
 });
+
+router.post("/auth/refreshToken", (req, res) => {
+    const schemaPayload = Joi.object({
+        refreshToken: Joi.string().required(),
+    });
+    const { error } = schemaPayload.validate(req.body);
+
+    if (error) {
+        res.status(400).send(error.details[0].message);
+        return;
+    }
+
+    refreshToken(req, res);
+})
 
 module.exports = router;
