@@ -9,6 +9,8 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+// API Routes
 app.use("/", indexRouter);
 
 checkConnectionDb()

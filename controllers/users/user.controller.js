@@ -5,7 +5,13 @@ const saltRounds = 10;
 
 exports.fetchAll = async (req, res) => {
     try {
-        const data = await Users.paginate({});
+        const options = {
+            page: req.query.page,
+            limit: req.query.limit,
+            select: 'name role email phone last_login'
+        }
+        const data = await Users.paginate({}, options);
+
         res.status(200).send({ data });
     } catch (error) {
         res.status(500).send({
@@ -34,7 +40,7 @@ exports.create = async (req, res) => {
 };
 exports.fetchOne = async (req, res) => {
     try {
-        const data = await Users.findById(req.params.id);
+        const data = await Users.findById(req.params.id).select('name email phone last_login')
         res.status(200).send({ data });
     } catch (error) {
         res.status(500).send({
