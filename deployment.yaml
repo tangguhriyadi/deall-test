@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deall-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deall-test
+  template:
+    metadata:
+      labels:
+        app: deall-test
+    spec:
+      containers:
+      - name: deall-test
+        image: gcr.io/vibrant-mind-385210/deall-test:latest
+        ports:
+          - containerPort: 3000
+        env:
+          - name: NODE_ENV
+            value: "development"
+          - name: APP_JWT_KEY
+            value: "secret"
+          - name: APP_JWT_EXP
+            value: "24h"
+          - name: APP_JWT_REFRESH_KEY
+            value: "secret-refresher"
+          - name: APP_PORT
+            value: "3000"
+          - name: MONGO_URI
+            value: mongodb://34.143.181.137:27017/local

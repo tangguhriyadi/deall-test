@@ -1,0 +1,6 @@
+NODE_ENV="development"
+APP_JWT_KEY="secret"
+APP_JWT_EXP="24h"
+APP_JWT_REFRESH_KEY="secret-refresher"
+APP_PORT=3000
+MONGO_URI=mongodb://34.143.181.137:27017/local

@@ -20,7 +20,7 @@ router.post("/users", validateToken, validateScope(['admin']), (req, res) => {
 
     const schemaPayload = Joi.object({
         name: Joi.string().required(),
-        role: Joi.string().required().default("user"),
+        role: Joi.string().default("user"),
         age: Joi.number().required(),
         email: Joi.string().email().required(),
         password: Joi.string()
