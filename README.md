@@ -6,7 +6,7 @@ email:mtangguh97@gmail.com
 password:a1S2D3!qr
 
 # API DOCUMENTATION (POSTMAN)
-https://drive.google.com/file/d/1p2qNyfYg-0qkcZY9KhC0Z72v_ugmkY5b/view?usp=share_link
+https://drive.google.com/file/d/1XskR_qyRaG9NRlvuT3oW9La_Xe9SrvCZ/view?usp=share_link
 
 # INSTALL PACKAGE
 ### `npm install`
