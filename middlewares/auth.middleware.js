@@ -2,6 +2,9 @@ const jwt = require("jsonwebtoken");
 
 exports.validateToken = (req, res, next) => {
     // retrieve the token from the Authorization header
+
+    if(!req.headers['authorization']) res.status(403).json({message: "Need Authentication !"})
+
     const token = req.headers['authorization'].split(' ')[1];
 
     // check whether the token exists or not
