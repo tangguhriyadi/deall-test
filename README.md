@@ -13,6 +13,3 @@ https://drive.google.com/file/d/1p2qNyfYg-0qkcZY9KhC0Z72v_ugmkY5b/view?usp=share
 
 # RUN DEVELOPMENT SERVER
 ### `npm run dev`
-
-# MONGO URI (SHARED)
-mongodb://34.143.181.137:27017/local
