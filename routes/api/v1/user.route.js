@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
-
 const {
     fetchAll,
     create,
@@ -16,11 +15,13 @@ const {
 const { passwordRegex } = require("../../../utils/constant");
 
 // API GET ALL
-router.get(
-    "/users",
-    validateToken,
-    validateScope(["admin", "user"]),
+router.get( // method
+    "/users", // endpoint
+    validateToken, // token validation
+    validateScope(["admin", "user"]), // role scope
     (req, res) => {
+        
+        // query validation
         const schemaQuery = Joi.object({
             page: Joi.number().required().default(1),
             limit: Joi.number().required().default(10),
@@ -33,12 +34,18 @@ router.get(
             return;
         }
 
-        fetchAll(req, res);
+        fetchAll(req, res); //controller
     }
 );
 
 // API CREATE
-router.post("/users", validateToken, validateScope(["admin"]), (req, res) => {
+router.post(  // method
+    "/users", // endpoint
+    validateToken, // token validation
+    validateScope(["admin"]), // role scope
+    (req, res) => {
+
+    // payload validation
     const schemaPayload = Joi.object({
         name: Joi.string().required(),
         role: Joi.string().default("user"),
@@ -70,15 +77,17 @@ router.post("/users", validateToken, validateScope(["admin"]), (req, res) => {
         return;
     }
 
-    create(req, res);
+    create(req, res) //controller
 });
 
 // API GET ONE
-router.get(
-    "/users/:id",
-    validateToken,
-    validateScope(["admin", "user"]),
+router.get(  // method
+    "/users/:id", // endpoint
+    validateToken, // token validation
+    validateScope(["admin", "user"]), // role scope
     (req, res) => {
+
+        // param validation
         const schemaParam = Joi.object({
             id: Joi.string().required(),
         });
@@ -90,19 +99,23 @@ router.get(
             return;
         }
 
-        fetchOne(req, res);
+        fetchOne(req, res); //controller
     }
 );
 
 // API UPDATE
-router.patch(
-    "/users/:id",
-    validateToken,
-    validateScope(["admin"]),
+router.patch(  // method
+    "/users/:id", // endpoint
+    validateToken, // token validation
+    validateScope(["admin"]), // role scope
     (req, res) => {
+
+        // param validation
         const schemaParam = Joi.object({
             id: Joi.string().required(),
         });
+
+        // payload validation
         const schemaPayload = Joi.object({
             name: Joi.string(),
             role: Joi.string().default("user"),
@@ -139,16 +152,18 @@ router.patch(
             return;
         }
 
-        patch(req, res);
+        patch(req, res); //controller
     }
 );
 
 // API DELETE
-router.delete(
-    "/users/:id",
-    validateToken,
-    validateScope(["admin"]),
+router.delete(  // method
+    "/users/:id", // endpoint
+    validateToken, // token validation
+    validateScope(["admin"]), // role scope
     (req, res) => {
+
+        // param validation
         const schemaParam = Joi.object({
             id: Joi.string().required(),
         });
@@ -160,7 +175,7 @@ router.delete(
             return;
         }
 
-        deleteOne(req, res);
+        deleteOne(req, res); //controller
     }
 );
 
